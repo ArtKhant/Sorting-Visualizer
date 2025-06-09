@@ -1,16 +1,20 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.Random;
 
 public class Window {
     JFrame frame;
     Board board;
+    Shuffler shuffler;
 
-    Enum[] sorters = {Sorters.Bubble, Sorters.Shaker, Sorters.Quick};
+    Enum[] sorters = {Sorters.Bubble, Sorters.Shaker, Sorters.Insertion, Sorters.Quick, Sorters.Selection, Sorters.Merge, Sorters.Comb, Sorters.Heap};
     Enum selectedSorter;
 
-    Enum[] dataTypes = {DataType.Triangle, DataType.Circle};
+    Enum[] dataTypes = {DataType.Triangle, DataType.Line, DataType.Spiral, DataType.ColorCircle};
     Enum selectedDataType;
+
+    Enum[] shuffleTypes = {ShufflingType.Full, ShufflingType.Backward, ShufflingType.FirstHalf, ShufflingType.SecondHalf, ShufflingType.Middle};
+    Enum selectedShufflingType;
 
     int lenght;
     int[] data;
@@ -22,11 +26,10 @@ public class Window {
 
         selectedSorter = Sorters.Bubble;
         selectedDataType = DataType.Triangle;
+        selectedShufflingType = ShufflingType.Full;
 
-        createData(128);
-
-        board = new Board(data, 0);
-
+        shuffler = new Shuffler();
+        createData(2048);
 
     }
 
@@ -41,7 +44,7 @@ public class Window {
     }
 
     public void create(){
-        frame.setSize(900, 900);
+        frame.setSize(1800, 900);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -64,41 +67,8 @@ public class Window {
         frame.add(board, BorderLayout.CENTER);
 
         JPanel sideController = new JPanel();
-        sideController.setLayout(new GridLayout(7, 1, 0,5));
-
-        JLabel top = new JLabel("Sorter controlls");
-        sideController.add(top);
-
-
-        JComboBox SortersTypeBar;
-        String data[] = {};
-        data = new String[sorters.length];
-
-        for (int i=0; i < sorters.length; i++){ data[i] = sorters[i].toString();}
-
-        SortersTypeBar = new JComboBox(data);
-        SortersTypeBar.addActionListener(e-> {
-            try {
-                selectedSorter = sorters[((JComboBox) e.getSource()).getSelectedIndex()];
-            }catch(Exception expt) {}
-        });
-        sideController.add(SortersTypeBar);
-
-
-
-        JComboBox DataTypeBar;
-
-        data = new String[dataTypes.length];
-
-        for (int i=0; i < dataTypes.length; i++){ data[i] = dataTypes[i].toString();}
-
-        DataTypeBar = new JComboBox(data);
-        DataTypeBar.addActionListener(e-> {
-            try {
-                selectedDataType = dataTypes[((JComboBox) e.getSource()).getSelectedIndex()];
-            }catch(Exception expt) {}
-        });
-        sideController.add(DataTypeBar);
+        sideController.setLayout(new GridLayout(4, 2, 20,5));
+        sideController.setBorder(new EmptyBorder(0, 20, 0, 20));
 
 
         JTextField DataLenght = new JTextField();
@@ -108,8 +78,49 @@ public class Window {
         JButton createData = new JButton("Create Data");
         createData.setAlignmentX(0);
         createData.setAlignmentY(0);
-        createData.addActionListener(e->{});
+        createData.addActionListener(e->{
+            try {
+                if (Integer.valueOf(DataLenght.getText())<=2048){
+                    createData(Integer.valueOf(DataLenght.getText()));
+                }
+            }catch(Exception expt){System.out.println(expt.getMessage());}
+        });
         sideController.add(createData);
+
+
+        JComboBox DataTypeBar;
+
+        String[] DataTypeList = new String[dataTypes.length];
+
+        for (int i=0; i < dataTypes.length; i++){ DataTypeList[i] = dataTypes[i].toString();}
+
+        DataTypeBar = new JComboBox(DataTypeList);
+        DataTypeBar.addActionListener(e-> {
+            try {
+                selectedDataType = dataTypes[((JComboBox) e.getSource()).getSelectedIndex()];
+                board.graph = selectedDataType;
+                frame.getContentPane().revalidate();
+                board.repaint();
+                frame.repaint();
+            }catch(Exception expt) {}
+        });
+        sideController.add(DataTypeBar);
+
+        sideController.add(new JLabel());
+
+        JComboBox ShufflersTypeBar;
+        String shufflersList[] = {};
+        shufflersList = new String[shuffleTypes.length];
+
+        for (int i=0; i < shuffleTypes.length; i++){ shufflersList[i] = shuffleTypes[i].toString();}
+
+        ShufflersTypeBar = new JComboBox(shufflersList);
+        ShufflersTypeBar.addActionListener(e-> {
+            try {
+                selectedShufflingType = shuffleTypes[((JComboBox) e.getSource()).getSelectedIndex()];
+            }catch(Exception expt) {}
+        });
+        sideController.add(ShufflersTypeBar);
 
 
         JButton shuffle = new JButton("shuffle");
@@ -123,28 +134,57 @@ public class Window {
         sideController.add(shuffle);
 
 
+        JComboBox SortersTypeBar;
+        String sortersList[] = {};
+        sortersList = new String[sorters.length];
+
+        for (int i=0; i < sorters.length; i++){ sortersList[i] = sorters[i].toString();}
+
+        SortersTypeBar = new JComboBox(sortersList);
+        SortersTypeBar.addActionListener(e-> {
+            try {
+                selectedSorter = sorters[((JComboBox) e.getSource()).getSelectedIndex()];
+            }catch(Exception expt) {}
+        });
+        sideController.add(SortersTypeBar);
+
+
         JButton sort = new JButton("sort");
         sort.setAlignmentX(0);
         sort.setAlignmentY(0);
         sort.addActionListener(e->{
             try{
-                if (sort()) {
-                    //done();
-                }
-            }catch(Exception expt){}
+                sort();
+            }catch(Exception expt){System.out.println(expt.getMessage());}
         });
         sideController.add(sort);
 
 
         frame.add(sideController, BorderLayout.EAST);
+
+        frame.repaint();
     }
 
     private void createData(int lenght){
+        try{
+            frame.remove(board);
+        }catch(Exception expt){System.out.println(expt.getMessage());}
+
         this.lenght = lenght;
         data = new int[lenght];
-        for(int i = 0; i < lenght; i++){
-            data[i] = i;
+        for(int i = 1; i < lenght+1; i++){
+            data[i-1] = i;
         }
+        board = new Board(data, 0);
+        if(board != null){
+            System.out.println("Data created new board added");
+        }
+        frame.add(board);
+        board.graph = selectedDataType;
+        frame.getContentPane().revalidate();
+
+        board.repaint();
+        frame.repaint();
     }
 
     private void done(){
@@ -170,36 +210,30 @@ public class Window {
 
     private void shuffle(){
         new Thread(() -> {
-            int mem;
-            Random r = new Random();
-            for (int i = 1; i < lenght; i++) {
-                int j = r.nextInt(0, i);
-                mem = data[i];
-                data[i] = data[j];
-                data[j] = mem;
-
-                board.index = i;
-
-                frame.repaint(); // This is safe because repaint() is thread-safe
-
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    // Handle interruption
-                }
+            switch (selectedShufflingType){
+                case ShufflingType.Full -> {shuffler.FullShuffle(data, board,frame);}
+                case ShufflingType.Backward -> {shuffler.BackwardShuffle(data, board, frame);}
+                case ShufflingType.FirstHalf -> {shuffler.FirstHalfShuffle(data, board, frame);}
+                case ShufflingType.SecondHalf -> {shuffler.SecondHalfShuffle(data, board, frame);}
+                default -> {}
             }
         }).start();
 
     }
 
-    private boolean sort(){
+    private void sort(){
         pointer = 0;
 
         switch (selectedSorter){
-            case Sorters.Bubble -> {BubbleSort b = new BubbleSort(data, board, frame); return true;}
-            case Sorters.Shaker ->{ShackerSort s = new ShackerSort(data, board, frame); return true;}
-            case Sorters.Quick -> {QuickSort q = new QuickSort(data, board, frame); return true;}
-            default -> {return false;}
+            case Sorters.Bubble -> {BubbleSort b = new BubbleSort(data, board, frame);}
+            case Sorters.Shaker ->{ShackerSort s = new ShackerSort(data, board, frame);}
+            case Sorters.Quick -> {QuickSort q = new QuickSort(data, board, frame);}
+            case Sorters.Insertion -> {InsertionSort i = new InsertionSort(data, board, frame);}
+            case Sorters.Selection -> {SelectionSort s = new SelectionSort(data, board, frame);}
+            case Sorters.Merge -> {MergeSort m = new MergeSort(data, board, frame);}
+            case Sorters.Comb -> {CombSort c = new CombSort(data, board, frame);}
+            case Sorters.Heap -> {HeapSort h = new HeapSort(data, board, frame);}
+            default -> {break;}
         }
     }
 }

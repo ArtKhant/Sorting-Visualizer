@@ -1,5 +1,10 @@
 public enum Sorters {
     Bubble,
     Shaker,
-    Quick
+    Quick,
+    Insertion,
+    Selection,
+    Merge,
+    Comb,
+    Heap
 }

@@ -1,4 +1,6 @@
 public enum DataType {
     Triangle,
-    Circle
+    Line,
+    Spiral,
+    ColorCircle
 }
