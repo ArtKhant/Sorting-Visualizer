@@ -53,23 +53,17 @@ public class CombSort {
     }
 
     private void done(Board board, JFrame frame, int lenght){
-        new Thread(() -> {
-            board.ready = true;
+        board.ready = true;
 
-            for (int i = 0; i < lenght; i++) {
-                board.index = i;
-                frame.repaint();
-
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    // Handle interruption
-                }
-            }
-
-            board.ready = false;
+        for (int i = 0; i < lenght; i++) {
+            board.index = i;
             frame.repaint();
-        }).start();
 
+            try {Thread.sleep(1);} catch (InterruptedException e) {}
+
+
+        }
+        board.ready = false;
+        frame.repaint();
     }
 }

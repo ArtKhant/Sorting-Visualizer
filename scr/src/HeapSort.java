@@ -117,12 +117,17 @@ public class HeapSort {
 
     private void done(Board board, JFrame frame, int lenght){
         board.ready = true;
+
         for (int i = 0; i < lenght; i++) {
             board.index = i;
             frame.repaint();
-            try {Thread.sleep(1);} catch (InterruptedException e) {}}
-            board.ready = false;
-            frame.repaint();
+
+            try {Thread.sleep(1);} catch (InterruptedException e) {}
+
+
+        }
+        board.ready = false;
+        frame.repaint();
     }
 
 

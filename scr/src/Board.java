@@ -58,7 +58,7 @@ public class Board extends JComponent{
             }
             float w = 2048 / lenght + 1;
             if(i==index){
-                g2d.fillRect((int) (50 + i * w/3), (int) (858 - data[i] * (w / 8)), (int) (w*3/2), (int) (data[i] * (w / 8)));
+                g2d.fillRect((int) (50 + i * w/3), (int) (858 - data[i] * (w / 8)), (int) (w), (int) (data[i] * (w / 8)));
             }else {
                 g2d.fillRect((int) (50 + i * w/3), (int) (858 - data[i] * (w / 8)), (int) (w*2/3), (int) (data[i] * (w / 8)));
             }

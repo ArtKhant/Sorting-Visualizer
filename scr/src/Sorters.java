@@ -6,5 +6,6 @@ public enum Sorters {
     Selection,
     Merge,
     Comb,
-    Heap
+    Heap,
+    Shell
 }

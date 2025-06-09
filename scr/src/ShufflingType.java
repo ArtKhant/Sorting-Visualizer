@@ -4,4 +4,6 @@ public enum ShufflingType {
     FirstHalf,
     SecondHalf,
     Middle,
+    CliffLeft,
+    CliffRight
 }

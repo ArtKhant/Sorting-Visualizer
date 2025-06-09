@@ -7,13 +7,13 @@ public class Window {
     Board board;
     Shuffler shuffler;
 
-    Enum[] sorters = {Sorters.Bubble, Sorters.Shaker, Sorters.Insertion, Sorters.Quick, Sorters.Selection, Sorters.Merge, Sorters.Comb, Sorters.Heap};
+    Enum[] sorters = {Sorters.Bubble, Sorters.Shaker, Sorters.Insertion, Sorters.Quick, Sorters.Selection, Sorters.Merge, Sorters.Comb, Sorters.Heap, Sorters.Shell};
     Enum selectedSorter;
 
     Enum[] dataTypes = {DataType.Triangle, DataType.Line, DataType.Spiral, DataType.ColorCircle};
     Enum selectedDataType;
 
-    Enum[] shuffleTypes = {ShufflingType.Full, ShufflingType.Backward, ShufflingType.FirstHalf, ShufflingType.SecondHalf, ShufflingType.Middle};
+    Enum[] shuffleTypes = {ShufflingType.Full, ShufflingType.Backward, ShufflingType.FirstHalf, ShufflingType.SecondHalf, ShufflingType.Middle, ShufflingType.CliffRight, ShufflingType.CliffLeft};
     Enum selectedShufflingType;
 
     int lenght;
@@ -187,26 +187,7 @@ public class Window {
         frame.repaint();
     }
 
-    private void done(){
-        new Thread(() -> {
-            board.ready = true;
 
-            for (int i = 0; i < lenght; i++) {
-                board.index = i;
-                frame.repaint(); // This is safe because repaint() is thread-safe
-
-                try {
-                    Thread.sleep(15);
-                } catch (InterruptedException e) {
-                    // Handle interruption
-                }
-            }
-
-            board.ready = false;
-            frame.repaint();
-        }).start();
-
-    }
 
     private void shuffle(){
         new Thread(() -> {
@@ -215,6 +196,9 @@ public class Window {
                 case ShufflingType.Backward -> {shuffler.BackwardShuffle(data, board, frame);}
                 case ShufflingType.FirstHalf -> {shuffler.FirstHalfShuffle(data, board, frame);}
                 case ShufflingType.SecondHalf -> {shuffler.SecondHalfShuffle(data, board, frame);}
+                case ShufflingType.Middle -> {shuffler.MiddleHalfShuffle(data, board, frame);}
+                case ShufflingType.CliffLeft -> {shuffler.CliffLeft(data, board, frame);}
+                case ShufflingType.CliffRight -> {shuffler.CliffRight(data, board, frame);}
                 default -> {}
             }
         }).start();
@@ -233,6 +217,7 @@ public class Window {
             case Sorters.Merge -> {MergeSort m = new MergeSort(data, board, frame);}
             case Sorters.Comb -> {CombSort c = new CombSort(data, board, frame);}
             case Sorters.Heap -> {HeapSort h = new HeapSort(data, board, frame);}
+            case Sorters.Shell -> {ShellSort s = new ShellSort(data, board, frame);}
             default -> {break;}
         }
     }
