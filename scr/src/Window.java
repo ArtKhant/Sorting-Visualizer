@@ -18,7 +18,6 @@ public class Window {
 
     int lenght;
     int[] data;
-    int pointer;
 
     public Window(){
 
