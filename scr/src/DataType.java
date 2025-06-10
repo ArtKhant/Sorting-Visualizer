@@ -3,4 +3,5 @@ public enum DataType {
     Line,
     Spiral,
     ColorCircle,
+    Bonefire
 }
