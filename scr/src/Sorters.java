@@ -7,5 +7,6 @@ public enum Sorters {
     Merge,
     Comb,
     Heap,
-    Shell
+    Shell,
+    RadixLSD
 }

@@ -7,7 +7,7 @@ public class Window {
     Board board;
     Shuffler shuffler;
 
-    Enum[] sorters = {Sorters.Bubble, Sorters.Shaker, Sorters.Insertion, Sorters.Quick, Sorters.Selection, Sorters.Merge, Sorters.Comb, Sorters.Heap, Sorters.Shell};
+    Enum[] sorters = {Sorters.Bubble, Sorters.Shaker, Sorters.Insertion, Sorters.Quick, Sorters.Selection, Sorters.Merge, Sorters.Comb, Sorters.Heap, Sorters.Shell, Sorters.RadixLSD};
     Enum selectedSorter;
 
     Enum[] dataTypes = {DataType.Triangle, DataType.Line, DataType.Spiral, DataType.ColorCircle, DataType.Bonefire};
@@ -241,6 +241,7 @@ public class Window {
                 case Sorters.Comb -> {CombSort c = new CombSort(data, board, frame);}
                 case Sorters.Heap -> {HeapSort h = new HeapSort(data, board, frame);}
                 case Sorters.Shell -> {ShellSort s = new ShellSort(data, board, frame);}
+                case Sorters.RadixLSD -> {RadixLSDSort r = new RadixLSDSort(data, board, frame);}
                 default -> {}
             }
 
