@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+
 public class Window {
     JFrame frame;
     Board board;
@@ -19,10 +20,14 @@ public class Window {
     int lenght;
     int[] data;
 
+    private boolean inProgress = false;
+
     public Window(){
 
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
 
         selectedSorter = Sorters.Bubble;
         selectedDataType = DataType.Triangle;
@@ -144,7 +149,10 @@ public class Window {
 
         shuffle.addActionListener(e->{
             try{
-                shuffle();
+                if (!inProgress){
+                    shuffle();
+                    inProgress = true;
+                }
             }catch(Exception expt){}
         });
 
@@ -174,7 +182,9 @@ public class Window {
 
         sort.addActionListener(e->{
             try{
-                sort();
+                if (!inProgress){
+                    sort();
+                }
             }catch(Exception expt){System.out.println(expt.getMessage());}
         });
 
@@ -225,23 +235,36 @@ public class Window {
                 case ShufflingType.CliffRight -> {shuffler.CliffRight(data, board, frame);}
                 default -> {}
             }
+            inProgress = false;
         }).start();
+
 
     }
 
     private void sort(){
+        inProgress = true;
         new Thread(() -> {
             switch (selectedSorter) {
-                case Sorters.Bubble -> {BubbleSort b = new BubbleSort(data, board, frame);}
-                case Sorters.Shaker -> {ShackerSort s = new ShackerSort(data, board, frame);}
-                case Sorters.Quick -> {QuickSort q = new QuickSort(data, board, frame);}
-                case Sorters.Insertion -> {InsertionSort i = new InsertionSort(data, board, frame);}
-                case Sorters.Selection -> {SelectionSort s = new SelectionSort(data, board, frame);}
-                case Sorters.Merge -> {MergeSort m = new MergeSort(data, board, frame);}
-                case Sorters.Comb -> {CombSort c = new CombSort(data, board, frame);}
-                case Sorters.Heap -> {HeapSort h = new HeapSort(data, board, frame);}
-                case Sorters.Shell -> {ShellSort s = new ShellSort(data, board, frame);}
-                case Sorters.RadixLSD -> {RadixLSDSort r = new RadixLSDSort(data, board, frame);}
+                case Sorters.Bubble -> {
+                    BubbleSort b = new BubbleSort(data, board, frame);}
+                case Sorters.Shaker -> {
+                    ShackerSort s = new ShackerSort(data, board, frame);}
+                case Sorters.Quick -> {
+                    QuickSort q = new QuickSort(data, board, frame);}
+                case Sorters.Insertion -> {
+                    InsertionSort i = new InsertionSort(data, board, frame);}
+                case Sorters.Selection -> {
+                    SelectionSort s = new SelectionSort(data, board, frame);}
+                case Sorters.Merge -> {
+                    MergeSort m = new MergeSort(data, board, frame);}
+                case Sorters.Comb -> {
+                    CombSort c = new CombSort(data, board, frame);}
+                case Sorters.Heap -> {
+                    HeapSort h = new HeapSort(data, board, frame);}
+                case Sorters.Shell -> {
+                    ShellSort s = new ShellSort(data, board, frame);}
+                case Sorters.RadixLSD -> {
+                    RadixLSDSort r = new RadixLSDSort(data, board, frame);}
                 default -> {}
             }
 
@@ -252,6 +275,7 @@ public class Window {
     private void SortedAnimation(Board board, JFrame frame, int lenght){
 
         board.setReadyness(true);
+        inProgress = false;
 
         for (int i = 0; i < lenght; i++) {
             board.setIndex(i);
