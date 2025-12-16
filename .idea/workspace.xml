@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="046ac066-c50b-4386-a647-e1fe8509b133" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/scr/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/src/HeapSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/scr/src/HeapSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/scr/src/Window.java" afterDir="false" />
-    </list>
+    <list default="true" id="046ac066-c50b-4386-a647-e1fe8509b133" name="Changes" comment="small fixes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +52,30 @@
       <option name="presentableId" value="Default" />
       <updated>1765892887188</updated>
     </task>
+    <task id="LOCAL-00001" summary="small fixes">
+      <option name="closed" value="true" />
+      <created>1765901990399</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1765901990399</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="small fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="small fixes" />
   </component>
 </project>
