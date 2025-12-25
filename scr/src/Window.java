@@ -14,7 +14,7 @@ public class Window {
     Enum[] dataTypes = {DataType.Triangle, DataType.Line, DataType.Spiral, DataType.ColorCircle, DataType.Bonefire};
     Enum selectedDataType;
 
-    Enum[] shuffleTypes = {ShufflingType.Full, ShufflingType.Backward, ShufflingType.FirstHalf, ShufflingType.SecondHalf, ShufflingType.Middle, ShufflingType.CliffRight, ShufflingType.CliffLeft};
+    Enum[] shuffleTypes = {ShufflingType.Full, ShufflingType.Backward, ShufflingType.FirstHalf, ShufflingType.SecondHalf, ShufflingType.Middle, ShufflingType.CliffRight, ShufflingType.CliffLeft, ShufflingType.Organ};
     Enum selectedShufflingType;
 
     int lenght;
@@ -83,11 +83,20 @@ public class Window {
         frame.add(board, BorderLayout.CENTER);
 
         JPanel sideController = new JPanel();
-        sideController.setLayout(new GridLayout(4, 2, 20,5));
+        sideController.setMaximumSize(new Dimension(50, 900));
+        sideController.setLayout(new GridLayout(4, 2, 10,5));
         sideController.setBorder(new EmptyBorder(0, 20, 0, 20));
 
 
-        JTextField DataLenght = new JTextField();
+        JComboBox DataLenght;
+
+
+        String[] DataLenghtList = new String[]{"256", "512", "1024", "2048", "4096"};
+
+
+
+        DataLenght = new JComboBox(DataLenghtList);
+
         sideController.add(DataLenght);
 
 
@@ -97,9 +106,7 @@ public class Window {
 
         createData.addActionListener(e->{
             try {
-                if (Integer.valueOf(DataLenght.getText())<=2048){
-                    createData(Integer.valueOf(DataLenght.getText()));
-                }
+                createData(Integer.valueOf(String.valueOf(DataLenght.getSelectedItem())));
             }catch(Exception expt){System.out.println(expt.getMessage());}
         });
 
@@ -233,6 +240,7 @@ public class Window {
                 case ShufflingType.Middle -> {shuffler.MiddleHalfShuffle(data, board, frame);}
                 case ShufflingType.CliffLeft -> {shuffler.CliffLeft(data, board, frame);}
                 case ShufflingType.CliffRight -> {shuffler.CliffRight(data, board, frame);}
+                case ShufflingType.Organ -> {shuffler.Organ(data, board, frame);}
                 default -> {}
             }
             inProgress = false;

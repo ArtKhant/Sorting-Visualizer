@@ -50,11 +50,26 @@ public class Board extends JComponent{
         this.ready = ready;
     }
 
+
     private void drawTriangle(){
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(new Color(0, 0, 0));
         g2d.fillRect(0, 0, 1800, 900);
+
+
+        int w = 1;
+        int SizeMult = 1;
+
+
+        if(lenght == 256){
+            w = 4; SizeMult = 4;
+        } else if (lenght == 512) {
+            w = 2; SizeMult = 2;
+        }else{
+            w = 1; SizeMult = 1;
+        }
+
         for(int i = 0; i < lenght; i++) {
             if (ready) {
                 if (i < index) {
@@ -71,11 +86,15 @@ public class Board extends JComponent{
                     g2d.setColor(new Color(255, 255, 255));
                 }
             }
-            float w = 2048 / lenght + 1;
+
+
+
+
+
             if(i==index){
-                g2d.fillRect((int) (50 + i * w/3), (int) (830 - data[i] * (w / 8)), (int) (w), (int) (data[i] * (w / 8)));
+                g2d.fillRect(25 + i * w, 830 - data[i] * w/2, w, data[i] * w * SizeMult/2);
             }else {
-                g2d.fillRect((int) (50 + i * w/3), (int) (830 - data[i] * (w / 8)), (int) (w*2/3), (int) (data[i] * (w / 8)));
+                g2d.fillRect(25 + i * w, 830 - data[i] * w/2, w, data[i] * w * SizeMult/2);
             }
         }
     }

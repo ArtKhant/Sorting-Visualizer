@@ -195,4 +195,43 @@ public class Shuffler {
         BackwardShuffle(data, board, frame);
 
     }
+
+    public void Organ(int[] data, Board board, JFrame frame){
+
+        int[] newData = new int[data.length];
+
+        for (int i = 0; i < data.length; i++) {
+            newData[i] = data[i];
+        }
+
+        for (int i = 0; i < data.length/2; i++) {
+            data[i] = newData[i*2];
+
+            board.setIndex(i);
+            frame.repaint();
+            long delay_in_nanoseconds = 100000;
+            long start_time = System.nanoTime();
+            while (true) {
+                long now = System.nanoTime();
+                long time_spent_sleeping_thus_far = now - start_time;
+                if (time_spent_sleeping_thus_far >= delay_in_nanoseconds) {
+                    break;
+                }
+            }
+        }
+        for (int i = 0; i < data.length/2; i++) {
+            data[data.length - i-1] = newData[i*2 + 1];
+            board.setIndex(i);
+            frame.repaint();
+            long delay_in_nanoseconds = 100000;
+            long start_time = System.nanoTime();
+            while (true) {
+                long now = System.nanoTime();
+                long time_spent_sleeping_thus_far = now - start_time;
+                if (time_spent_sleeping_thus_far >= delay_in_nanoseconds) {
+                    break;
+                }
+            }
+        }
+    }
 }
