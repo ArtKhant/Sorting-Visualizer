@@ -18,7 +18,7 @@ public class Shuffler {
 
             board.setIndex(i);
             frame.repaint();
-            long delay_in_nanoseconds = 100000;
+            long delay_in_nanoseconds = 500000;
             long start_time = System.nanoTime();
 
             while (true) {
@@ -43,7 +43,7 @@ public class Shuffler {
 
             board.setIndex(i);
             frame.repaint();
-            long delay_in_nanoseconds = 100000;
+            long delay_in_nanoseconds = 500000;
             long start_time = System.nanoTime();
 
             while (true) {
@@ -72,7 +72,7 @@ public class Shuffler {
 
             board.setIndex(i);
             frame.repaint();
-            long delay_in_nanoseconds = 100000;
+            long delay_in_nanoseconds = 500000;
             long start_time = System.nanoTime();
 
             while (true) {
@@ -101,7 +101,7 @@ public class Shuffler {
 
             board.setIndex(i);
             frame.repaint();
-            long delay_in_nanoseconds = 100000;
+            long delay_in_nanoseconds = 500000;
             long start_time = System.nanoTime();
 
             while (true) {
@@ -130,7 +130,7 @@ public class Shuffler {
 
             board.setIndex(i);
             frame.repaint();
-            long delay_in_nanoseconds = 100000;
+            long delay_in_nanoseconds = 500000;
             long start_time = System.nanoTime();
 
             while (true) {
@@ -155,7 +155,7 @@ public class Shuffler {
 
             board.setIndex(i);
             frame.repaint();
-            long delay_in_nanoseconds = 100000;
+            long delay_in_nanoseconds = 500000;
             long start_time = System.nanoTime();
 
             while (true) {
@@ -176,7 +176,7 @@ public class Shuffler {
 
             board.setIndex(i);
             frame.repaint();
-            long delay_in_nanoseconds = 100000;
+            long delay_in_nanoseconds = 500000;
             long start_time = System.nanoTime();
             while (true) {
                 long now = System.nanoTime();
@@ -209,7 +209,7 @@ public class Shuffler {
 
             board.setIndex(i);
             frame.repaint();
-            long delay_in_nanoseconds = 100000;
+            long delay_in_nanoseconds = 500000;
             long start_time = System.nanoTime();
             while (true) {
                 long now = System.nanoTime();
@@ -223,7 +223,7 @@ public class Shuffler {
             data[data.length - i-1] = newData[i*2 + 1];
             board.setIndex(i);
             frame.repaint();
-            long delay_in_nanoseconds = 100000;
+            long delay_in_nanoseconds = 500000;
             long start_time = System.nanoTime();
             while (true) {
                 long now = System.nanoTime();
@@ -233,5 +233,50 @@ public class Shuffler {
                 }
             }
         }
+    }
+
+    public void Distortion(int[] data, Board board, JFrame frame){
+
+        Random r = new Random();
+
+        int bound = r.nextInt(99, 100);
+
+        boolean mutated = false;
+
+        for(int i = 0; i < bound; i++){
+
+
+            switch(r.nextInt(0, 20)){
+
+                case 0 -> {BackwardShuffle(data, board, frame);}
+                case 1 -> {BackwardShuffle(data, board, frame);}
+                case 2 -> {BackwardShuffle(data, board, frame);}
+                case 3 -> {BackwardShuffle(data, board, frame);}
+
+                case 4 -> {CliffRight(data, board, frame);}
+                case 5 -> {CliffLeft(data, board, frame);}
+                default -> {Organ(data, board, frame);}
+            }
+
+//            if(!mutated) {
+//                switch (r.nextInt(0, 4)) {
+//                    case 0 -> {
+//                        MiddleHalfShuffle(data, board, frame);
+//                        mutated = true;
+//                    }
+//                }
+//            }
+        }
+
+        long delay_in_nanoseconds = 500000;
+        long start_time = System.nanoTime();
+        while (true) {
+            long now = System.nanoTime();
+            long time_spent_sleeping_thus_far = now - start_time;
+            if (time_spent_sleeping_thus_far >= delay_in_nanoseconds) {
+                break;
+            }
+        }
+        
     }
 }

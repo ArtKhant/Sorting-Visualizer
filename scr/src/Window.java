@@ -14,7 +14,7 @@ public class Window {
     Enum[] dataTypes = {DataType.Triangle, DataType.Line, DataType.Spiral, DataType.ColorCircle, DataType.Bonefire};
     Enum selectedDataType;
 
-    Enum[] shuffleTypes = {ShufflingType.Full, ShufflingType.Backward, ShufflingType.FirstHalf, ShufflingType.SecondHalf, ShufflingType.Middle, ShufflingType.CliffRight, ShufflingType.CliffLeft, ShufflingType.Organ};
+    Enum[] shuffleTypes = {ShufflingType.Full, ShufflingType.Backward, ShufflingType.FirstHalf, ShufflingType.SecondHalf, ShufflingType.Middle, ShufflingType.CliffRight, ShufflingType.CliffLeft, ShufflingType.Organ, ShufflingType.Distortion};
     Enum selectedShufflingType;
 
     int lenght;
@@ -34,7 +34,7 @@ public class Window {
         selectedShufflingType = ShufflingType.Full;
 
         shuffler = new Shuffler();
-        createData(2048);
+        createData(256);
 
     }
 
@@ -60,7 +60,7 @@ public class Window {
         frame.setLocationRelativeTo(null);
         LoadInterface();
         System.out.println("window class created");
-
+        inProgress = false;
     }
 
     public void kill(){
@@ -241,6 +241,7 @@ public class Window {
                 case ShufflingType.CliffLeft -> {shuffler.CliffLeft(data, board, frame);}
                 case ShufflingType.CliffRight -> {shuffler.CliffRight(data, board, frame);}
                 case ShufflingType.Organ -> {shuffler.Organ(data, board, frame);}
+                case ShufflingType.Distortion -> {shuffler.Distortion(data, board, frame);}
                 default -> {}
             }
             inProgress = false;

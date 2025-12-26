@@ -104,29 +104,34 @@ public class Board extends JComponent{
 
         g2d.setColor(new Color(0, 0, 0));
         g2d.fillRect(0, 0, 1800, 900);
+
+        float w = 2048 / lenght + 1;
+
+
         for(int i = 0; i < lenght; i++) {
             if (ready) {
                 if (i < index) {
                     g2d.setColor(new Color(10, 255, 10));
-                } else if (i == index) {
-                    g2d.setColor(new Color(255, 10, 10));
                 } else {
                     g2d.setColor(new Color(255, 255, 255));
                 }
             } else {
-                if (i == index) {
-                    g2d.setColor(new Color(255, 10, 10));
-                } else {
-                    g2d.setColor(new Color(255, 255, 255));
-                }
+                g2d.setColor(new Color(255, 255, 255));
+
             }
-            float w = 2048 / lenght + 1;
+
             if(i==index){
-                g2d.fillOval((int) (50 + i * w*2/6), (int) (850 - data[i] * (w * 1/6)), (int) (w * 3), (int) (w * 3));
+                g2d.fillOval((int) (50 + i * w*2/6), (int) (800 - data[i] * (w * 1/6)), (int) (w * 2), (int) (w * 2));
             }else {
-                g2d.fillOval((int) (50 + i * w*2/6), (int) (850 - data[i] * (w * 1/6)), (int) (w * 3), (int) (w * 3));
+                g2d.fillOval((int) (50 + i * w*2/6), (int) (800 - data[i] * (w * 1/6)), (int) (w * 2), (int) (w * 2));
             }
         }
+
+        if(index >= lenght){index = lenght-1;}
+        g2d.setColor(new Color(255, 10, 10));
+        g2d.fillOval((int) (50 + index * w*2/6), (int) (800 - data[index] * (w * 1/6)), (int) (w * 2), (int) (w * 2));
+
+
     }
 
     private void drawSpiral(){
@@ -134,29 +139,35 @@ public class Board extends JComponent{
 
         g2d.setColor(new Color(0, 0, 0));
         g2d.fillRect(0, 0, 1800, 900);
+
+        int w = 1024 / lenght +1;
+
         for(int i = 0; i < lenght; i++) {
             if (ready) {
                 if (i < index) {
                     g2d.setColor(new Color(10, 255, 10));
-                } else if (i == index) {
-                    g2d.setColor(new Color(255, 10, 10));
-                } else {
+                }else {
                     g2d.setColor(new Color(255, 255, 255));
                 }
             } else {
                 if (i == index) {
-                    g2d.setColor(new Color(255, 10, 10));
+
                 } else {
                     g2d.setColor(new Color(255, 255, 255));
                 }
             }
-            int w = 1024 / lenght +1;
-            if(i==index){
-                g2d.fillOval((int) (850 + Math.cos( Math.toRadians(360*i/lenght)) * data[i] * w/5), (int) (450 + Math.sin(Math.toRadians(360*i/lenght)) * data[i] * w/5), w*10, w*10 );
-            }else {
-                g2d.fillOval((int) (850 + Math.cos( Math.toRadians(360*i/lenght)) * data[i] * w/5), (int) (450 + Math.sin(Math.toRadians(360*i/lenght)) * data[i] * w/5), w, w );
-            }
+
+
+            g2d.fillOval((int) (600 + Math.cos( Math.toRadians(360*i/lenght)) * data[i] * w/5), (int) (410+ Math.sin(Math.toRadians(360*i/lenght)) * data[i] * w/5), w, w );
+
+
         }
+
+        if(index >= lenght){index = lenght-1;}
+
+        g2d.setColor(new Color(255, 10, 10));
+        g2d.fillOval((int) (600 + Math.cos( Math.toRadians(360*index/lenght)) * data[index] * w/5), (int) (410 + Math.sin(Math.toRadians(360*index/lenght)) * data[index] * w/5), w*3, w*3 );
+
     }
 
     private void drawColorCircle(){

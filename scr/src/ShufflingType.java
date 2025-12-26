@@ -6,5 +6,6 @@ public enum ShufflingType {
     Middle,
     CliffLeft,
     CliffRight,
-    Organ
+    Organ,
+    Distortion
 }
