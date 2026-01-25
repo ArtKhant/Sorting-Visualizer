@@ -221,11 +221,14 @@ public class Board extends JComponent{
                     g2d.setColor(new Color(255, 255, 255));
                 }
             }
-            int w = 1024 / lenght +1;
+            double w = 1024 / lenght +1;
+
+            double r = Math.pow(Math.sin( 1.2 * data[i]), 2) + Math.pow(Math.cos( 6 * data[i]), 3) * 400;
+
             if(i==index){
-                g2d.fillOval((int) (850 + Math.cos( Math.toRadians(360*i/lenght))  * w/5), (int) (450 + Math.sin(Math.toRadians(360*i/lenght))  * w/5), w*10, w*10 );
+                g2d.fillOval((int) (850 + Math.cos( Math.toRadians(360*i/lenght)) * r)  , (int) (450 + Math.sin(Math.toRadians(360*i/lenght)) * r), (int) (w*6), (int) (w*6));
             }else {
-                g2d.fillOval((int) (850 + Math.cos( Math.toRadians(360*i/lenght)) * data[i] * Math.sin( Math.toRadians(360*data[i]/lenght)) * w/5), (int) (450 + Math.sin(Math.toRadians(360*i/lenght)) * data[i] * Math.cos(Math.toRadians(360*data[i]/lenght)) * w/5), w, w );
+                g2d.fillOval((int) (850 + Math.cos( Math.toRadians(360*i/lenght)) * r)  , (int) (450 + Math.sin(Math.toRadians(360*i/lenght)) * r), (int) (w*3), (int) (w*3));
             }
         }
     }

@@ -54,6 +54,7 @@ public class Window {
 
     public void create(){
 
+
         frame.setSize(1800, 900);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,10 +106,18 @@ public class Window {
         createData.setAlignmentY(0);
 
         createData.addActionListener(e->{
-            try {
-                createData(Integer.valueOf(String.valueOf(DataLenght.getSelectedItem())));
-            }catch(Exception expt){System.out.println(expt.getMessage());}
+                try {
+
+                    if(!inProgress){
+                        createData(Integer.valueOf(String.valueOf(DataLenght.getSelectedItem())));
+
+                    }
+
+                }catch(Exception expt){System.out.println(expt.getMessage());}
         });
+
+
+
 
         sideController.add(createData);
 

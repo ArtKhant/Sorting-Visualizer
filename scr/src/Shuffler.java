@@ -239,7 +239,7 @@ public class Shuffler {
 
         Random r = new Random();
 
-        int bound = r.nextInt(99, 100);
+        int bound = r.nextInt(8, 10);
 
         boolean mutated = false;
 
