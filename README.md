@@ -16,11 +16,13 @@ Unfortunately not all visualisations work correctly with big sized data. Spiral,
 
 Visualisers can be changed during shuffling or sorting, currently there's 5 types of visualisatin:
 
-![Triangle](https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/triangle.png =250x250)
-![Line](https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/circle.png =250x250)
-![Spiral](https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/spiral.png =250x250)
-![Circle](https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/circle.png =250x250
-![Bonefire](https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/function.png =250x250)
+<img src="https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/triangle.png" alt="Distortin shuffler" style="width:50%; height:auto;">
+<img src="https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/line.png" alt="Distortin shuffler" style="width:50%; height:auto;">
+<img src="https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/spiral.png" alt="Distortin shuffler" style="width:50%; height:auto;">
+<img src="https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/triangle.png" alt="Distortin shuffler" style="width:50%; height:auto;">
+<img src="https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/function.png" alt="Distortin shuffler" style="width:50%; height:auto;">
+
+
 
 
 ## Shufflers
@@ -28,9 +30,13 @@ Visualisers can be changed during shuffling or sorting, currently there's 5 type
 
 Thre're multiple shuffling methods
 
-4 `random` shufflers such as Full, FirstHalf, SecondHalf and Middle. This shufflers shuffle randomly different parts of dataset.
-5 'displace' shufflers change places of set elements, putting them in different patterns, Distortin shuffler randomly calls other 'displace' shufflers, creating unusual paterns.
-![Possible result of Distortin shuffler](https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/distortionExample.png =250x250)
+- 4 `random` shufflers such as Full, FirstHalf, SecondHalf and Middle. This shufflers shuffle randomly different parts of dataset.
+- 5 `displace` shufflers change places of set elements, putting them in different patterns.
+> Distortin shuffler randomly calls other `displace` shufflers, creating unusual paterns.
+
+
+
+<img src="https://github.com/ArtKhant/Sorting-Visualizer/blob/main/images/distortion.png" alt="Distortin shuffler" style="width:50%; height:auto;">
 
 
 
